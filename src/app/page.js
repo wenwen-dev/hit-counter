@@ -4,26 +4,17 @@ import { readFile, writeFile } from '../helpers/file-helpers';
 
 const DATABASE_PATH = '/src/database.json';
 
-function incrementNumOfVisitors() {
-  const current = JSON.parse(readFile(DATABASE_PATH));
-  const newNumber = current.hits + 1;
-  console.log(newNumber);
-  const result = JSON.stringify({ hits: newNumber });
-  writeFile(DATABASE_PATH, result);
-}
-
-function getNumOfVisitors() {
-  const ob = JSON.parse(readFile(DATABASE_PATH));
-  return ob.hits;
-}
-
 function Home() {
-  incrementNumOfVisitors();
+  let { hits } = JSON.parse(readFile(DATABASE_PATH));
+
+  hits += 1;
+
+  writeFile(DATABASE_PATH, JSON.stringify({ hits }));
 
   return (
     <main>
       <h1>Welcome!</h1>
-      <p>You are visitor number {getNumOfVisitors()}.</p>
+      <p>You are visitor number {hits}.</p>
     </main>
   );
 }
