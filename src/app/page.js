@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { readFile, writeFile } from '../helpers/file-helpers';
+import Button from '../Button';
 
 const DATABASE_PATH = '/src/database.json';
 
@@ -14,7 +15,10 @@ function Home() {
   return (
     <main>
       <h1>Welcome!</h1>
-      <p>You are visitor number {hits}.</p>
+      <p>
+        You are visitor number{' '}
+        <Button censoredStyles={{ filter: 'blur(4px)' }}>{hits}</Button>
+      </p>
     </main>
   );
 }
