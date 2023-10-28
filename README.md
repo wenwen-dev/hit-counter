@@ -17,7 +17,16 @@
 5. Using React Server Component  
    Because RSC runs only on the server, doesn't re-render on the client side, we don't need to worry about those concerns and can write code e.g. `hits += 1`
 
----
+6. Component ownership  
+   A Server component cannot be owned by Client components, because it's rendered first on the server. However, owning and using are 2 different things.
+
+```
+   <AClientComponent>
+      <AServerComponent />
+   </AClientComponent>
+```
+
+## This code might work, if the client component takes the server component as prop (children), using whatever it returns as children, to return something which doesn't include creating a server component.
 
 # Hit Counter exercise
 
