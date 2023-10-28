@@ -1,33 +1,29 @@
 import React from 'react';
 
-import {
-  readFile,
-  writeFile,
-} from '../helpers/file-helpers';
+import { readFile, writeFile } from '../helpers/file-helpers';
 
 const DATABASE_PATH = '/src/database.json';
 
-/*
-`readFile` takes 1 argument:
-• the path to the file:
+function incrementNumOfVisitors() {
+  const current = JSON.parse(readFile(DATABASE_PATH));
+  const newNumber = current.hits + 1;
+  console.log(newNumber);
+  const result = JSON.stringify({ hits: newNumber });
+  writeFile(DATABASE_PATH, result);
+}
 
-readFile('/path/to/file');
-
-`writeFile` takes 2 arguments:
-• The path to the file
-• The new contents for the file
-
-writeFile(
-  '/path/to/file',
-  '{ "hello": "world" }'
-);
-*/
+function getNumOfVisitors() {
+  const ob = JSON.parse(readFile(DATABASE_PATH));
+  return ob.hits;
+}
 
 function Home() {
+  incrementNumOfVisitors();
+
   return (
     <main>
       <h1>Welcome!</h1>
-      <p>You are visitor number X.</p>
+      <p>You are visitor number {getNumOfVisitors()}.</p>
     </main>
   );
 }
